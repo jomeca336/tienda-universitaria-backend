@@ -22,8 +22,8 @@ public class Customer {
 
     String name;
     String email;
-
     CustomerStatus status;
+
     @OneToMany
     List <Address> addresses;
 

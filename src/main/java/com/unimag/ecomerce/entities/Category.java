@@ -20,5 +20,5 @@ public class Category {
     String name;
 
     @OneToMany
-    List <Product> prodcuts;
+    List <Product> products;
 }
