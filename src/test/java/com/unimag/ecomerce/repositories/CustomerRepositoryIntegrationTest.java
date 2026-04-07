@@ -30,8 +30,8 @@ class CustomerRepositoryIntegrationTest extends AbstractRepositoryIT {
         Customer c2 = Customer.builder().name("Bob Jones").email("bob@mail.com").build();
         customerRepo.saveAll(List.of(c1, c2));
 
-        Address a1 = Address.builder().addressline("St 1").city("City 1").customer(c1).build();
-        Address a2 = Address.builder().addressline("St 2").city("City 2").customer(c2).build();
+        Address a1 = Address.builder().addressLine("St 1").city("City 1").customer(c1).build();
+        Address a2 = Address.builder().addressLine("St 2").city("City 2").customer(c2).build();
         addressRepo.saveAll(List.of(a1, a2));
 
         // Alice compró 50

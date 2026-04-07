@@ -38,7 +38,7 @@ class OrderRepositoryIntegrationTest extends AbstractRepositoryIT {
         Customer c1 = Customer.builder().name("John Doe").email("john@mail.com").build();
         customerRepo.save(c1);
 
-        Address a1 = Address.builder().addressline("Main St").city("Springfield").customer(c1).build();
+        Address a1 = Address.builder().addressLine("Main St").city("Springfield").customer(c1).build();
         addressRepo.save(a1);
 
         Order ord = Order.builder()
@@ -66,7 +66,7 @@ class OrderRepositoryIntegrationTest extends AbstractRepositoryIT {
     void shouldCalculateMonthlyIncome() {
         Customer c1 = Customer.builder().name("Jane Doe").email("jane@mail.com").build();
         customerRepo.save(c1);
-        Address a1 = Address.builder().addressline("2nd St").city("Springfield").customer(c1).build();
+        Address a1 = Address.builder().addressLine("2nd St").city("Springfield").customer(c1).build();
         addressRepo.save(a1);
 
         Order ord1 = Order.builder().customer(c1).shippingAddress(a1).orderDate(Instant.now()).total(200.0).status(OrderStatus.PAID).build();
@@ -96,7 +96,7 @@ class OrderRepositoryIntegrationTest extends AbstractRepositoryIT {
 
         Customer c1 = Customer.builder().name("Bob Sponge").email("bob@mail.com").build();
         customerRepo.save(c1);
-        Address a1 = Address.builder().addressline("Bikini").city("Bottom").customer(c1).build();
+        Address a1 = Address.builder().addressLine("Bikini").city("Bottom").customer(c1).build();
         addressRepo.save(a1);
 
         Order ord = Order.builder().customer(c1).shippingAddress(a1).orderDate(Instant.now()).total(100.0).status(OrderStatus.PAID).build();
