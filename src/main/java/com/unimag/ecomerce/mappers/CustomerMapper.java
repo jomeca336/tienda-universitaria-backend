@@ -2,7 +2,6 @@ package com.unimag.ecomerce.mappers;
 
 import com.unimag.ecomerce.dto.CustomerDTO;
 import com.unimag.ecomerce.entities.Customer;
-import com.unimag.ecomerce.enums.CustomerStatus;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
