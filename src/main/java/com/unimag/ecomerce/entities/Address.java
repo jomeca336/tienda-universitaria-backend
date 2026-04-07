@@ -14,7 +14,7 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    String addressline;
+    String addressLine;
     String city;
 
     @ManyToOne
