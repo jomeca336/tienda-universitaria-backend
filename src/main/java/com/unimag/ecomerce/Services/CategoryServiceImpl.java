@@ -3,8 +3,8 @@ package com.unimag.ecomerce.Services;
 import com.unimag.ecomerce.dto.CategoryDTO;
 import com.unimag.ecomerce.entities.Category;
 import com.unimag.ecomerce.mappers.CategoryMapper;
+import com.unimag.ecomerce.exception.NotFoundException;
 import com.unimag.ecomerce.repositories.CategoryRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional(readOnly = true)
     public Category getObjectById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Category not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("Category not found with id: " + id));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Category not found");
+            throw new NotFoundException("Category not found");
         }
         repository.deleteById(id);
     }

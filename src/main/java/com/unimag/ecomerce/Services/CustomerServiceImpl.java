@@ -3,8 +3,8 @@ package com.unimag.ecomerce.Services;
 import com.unimag.ecomerce.dto.CustomerDTO;
 import com.unimag.ecomerce.entities.Customer;
 import com.unimag.ecomerce.mappers.CustomerMapper;
+import com.unimag.ecomerce.exception.NotFoundException;
 import com.unimag.ecomerce.repositories.CustomerRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(readOnly = true)
     public Customer getObjectById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Customer not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("Customer not found with id: " + id));
     }
 
     @Override
@@ -59,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Customer not found");
+            throw new NotFoundException("Customer not found");
         }
         repository.deleteById(id);
     }

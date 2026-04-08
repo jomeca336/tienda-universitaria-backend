@@ -13,7 +13,7 @@ public class OrderDTO {
         Long shippingAddressId
     ) implements Serializable{}
 
-    public record CancelOrder() implements Serializable {}
+    public record CancelOrderRequest() implements Serializable {}
 
     public record OrderResponse(
             Long id,

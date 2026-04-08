@@ -41,5 +41,3 @@ Y fueron implementados con éxito:
 - **`OrderRepositoryIntegrationTest`**: Demuestra de un solo despliegue una cadena compleja que verifica filtros cruzados sobre pedidos, el cálculo numérico por meses pagados y la fiabilidad de venta y rotación de items (`findTopSellingProducts`).
 - **`ProductRepositoryIntegrationTest`**: Persiste productos que intencionalmente se asignan a clasificaciones deshabilitadas para revisar la pulcritud con la que excluye de la búsqueda principal según categoría.
 
----
-**Nota:** El proyecto provee exitosamente una cobertura general limpia sobre cada criterio del sistema (*Build Success* confirmando conexión de la persistencia).

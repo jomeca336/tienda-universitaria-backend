@@ -5,7 +5,6 @@ import com.unimag.ecomerce.entities.Address;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-
 @Mapper(componentModel = "spring")
 public interface AddressMapper {
     @Mapping(target = "id", ignore = true)

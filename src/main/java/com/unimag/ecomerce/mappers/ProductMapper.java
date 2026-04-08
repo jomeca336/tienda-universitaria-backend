@@ -15,5 +15,10 @@ public interface ProductMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "category", ignore = true)
     @Mapping(target = "inventory", ignore = true)
+    Product toEntity(ProductDTO.CreateProductRequest request);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "category", ignore = true)
+    @Mapping(target = "inventory", ignore = true)
     void updateEntity(ProductDTO.UpdateProductRequest request, @MappingTarget Product product);
 }

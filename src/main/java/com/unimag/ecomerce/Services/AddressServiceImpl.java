@@ -4,9 +4,9 @@ package com.unimag.ecomerce.Services;
 import com.unimag.ecomerce.dto.AddressDTO;
 import com.unimag.ecomerce.entities.Address;
 import com.unimag.ecomerce.mappers.AddressMapper;
+import com.unimag.ecomerce.exception.NotFoundException;
 import com.unimag.ecomerce.repositories.AddressRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +37,7 @@ public class AddressServiceImpl implements AddressService {
     @Transactional(readOnly = true)
     public Address getObjectById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Address not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("Address not found with id: " + id));
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Address not found");
+            throw new NotFoundException("Address not found");
         }
         repository.deleteById(id);
     }

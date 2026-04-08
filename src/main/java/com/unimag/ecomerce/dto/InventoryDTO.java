@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class InventoryDTO {
 
-    private record UpdateInventoryRequest(
+    public record UpdateInventoryRequest(
             Integer stock,
             Integer minStock
 
     ) implements Serializable {}
 
-    private record InventoryResponse(
+    public record InventoryResponse(
             Long id,
             Integer stock,
             Integer minStock
