@@ -1,4 +1,4 @@
-package com.unimag.ecomerce.Services;
+package com.unimag.ecomerce.services;
 
 import com.unimag.ecomerce.dto.ReportDTO;
 import com.unimag.ecomerce.entities.Customer;

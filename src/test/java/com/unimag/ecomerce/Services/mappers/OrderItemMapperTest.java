@@ -1,4 +1,4 @@
-package com.unimag.ecomerce.Services.mappers;
+package com.unimag.ecomerce.services.mappers;
 
 import com.unimag.ecomerce.dto.OrderItemDTO;
 import com.unimag.ecomerce.entities.OrderItem;

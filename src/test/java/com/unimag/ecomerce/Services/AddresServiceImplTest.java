@@ -1,4 +1,4 @@
-package com.unimag.ecomerce.Services;
+package com.unimag.ecomerce.services;
 
 public class AddresServiceImplTest {
 }

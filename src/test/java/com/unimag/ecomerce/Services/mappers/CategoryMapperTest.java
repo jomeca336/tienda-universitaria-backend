@@ -1,4 +1,4 @@
-package com.unimag.ecomerce.Services.mappers;
+package com.unimag.ecomerce.services.mappers;
 
 import com.unimag.ecomerce.dto.CategoryDTO;
 import com.unimag.ecomerce.entities.Category;
