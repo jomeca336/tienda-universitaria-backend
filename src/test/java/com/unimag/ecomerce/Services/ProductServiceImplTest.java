@@ -1,12 +1,12 @@
 package com.unimag.ecomerce.services;
 
-import com.unimag.ecomerce.dto.ProductDTO;
-import com.unimag.ecomerce.entities.Category;
-import com.unimag.ecomerce.entities.Inventory;
-import com.unimag.ecomerce.entities.Product;
-import com.unimag.ecomerce.mappers.ProductMapper;
-import com.unimag.ecomerce.repositories.InventoryRepository;
-import com.unimag.ecomerce.repositories.ProductRepository;
+import com.unimag.ecomerce.api.dto.ProductDTO;
+import com.unimag.ecomerce.domine.entities.Category;
+import com.unimag.ecomerce.domine.entities.Inventory;
+import com.unimag.ecomerce.domine.entities.Product;
+import com.unimag.ecomerce.services.mappers.ProductMapper;
+import com.unimag.ecomerce.domine.repositories.InventoryRepository;
+import com.unimag.ecomerce.domine.repositories.ProductRepository;
 import com.unimag.ecomerce.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

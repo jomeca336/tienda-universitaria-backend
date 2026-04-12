@@ -1,9 +1,9 @@
 package com.unimag.ecomerce.services.mappers;
 
-import com.unimag.ecomerce.dto.OrderItemDTO;
-import com.unimag.ecomerce.entities.OrderItem;
-import com.unimag.ecomerce.entities.Product;
-import com.unimag.ecomerce.mappers.OrderItemMapper;
+import com.unimag.ecomerce.api.dto.OrderItemDTO;
+import com.unimag.ecomerce.domine.entities.OrderItem;
+import com.unimag.ecomerce.domine.entities.Product;
+import com.unimag.ecomerce.services.mappers.OrderItemMapper;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 

@@ -1,10 +1,10 @@
 package com.unimag.ecomerce.services;
 
-import com.unimag.ecomerce.dto.CustomerDTO;
-import com.unimag.ecomerce.entities.Customer;
-import com.unimag.ecomerce.mappers.CustomerMapper;
+import com.unimag.ecomerce.api.dto.CustomerDTO;
+import com.unimag.ecomerce.domine.entities.Customer;
+import com.unimag.ecomerce.services.mappers.CustomerMapper;
 import com.unimag.ecomerce.exception.NotFoundException;
-import com.unimag.ecomerce.repositories.CustomerRepository;
+import com.unimag.ecomerce.domine.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

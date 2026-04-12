@@ -1,8 +1,8 @@
 package com.unimag.ecomerce.services.mappers;
 
-import com.unimag.ecomerce.dto.CategoryDTO;
-import com.unimag.ecomerce.entities.Category;
-import com.unimag.ecomerce.mappers.CategoryMapper;
+import com.unimag.ecomerce.api.dto.CategoryDTO;
+import com.unimag.ecomerce.domine.entities.Category;
+import com.unimag.ecomerce.services.mappers.CategoryMapper;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 import static org.assertj.core.api.Assertions.assertThat;

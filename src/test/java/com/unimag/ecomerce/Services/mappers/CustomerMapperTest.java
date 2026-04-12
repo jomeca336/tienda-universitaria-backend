@@ -1,8 +1,8 @@
 package com.unimag.ecomerce.services.mappers;
-import com.unimag.ecomerce.dto.CustomerDTO;
-import com.unimag.ecomerce.entities.Customer;
+import com.unimag.ecomerce.api.dto.CustomerDTO;
+import com.unimag.ecomerce.domine.entities.Customer;
 import com.unimag.ecomerce.enums.CustomerStatus;
-import com.unimag.ecomerce.mappers.CustomerMapper;
+import com.unimag.ecomerce.services.mappers.CustomerMapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;

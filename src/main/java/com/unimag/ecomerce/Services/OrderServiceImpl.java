@@ -1,15 +1,15 @@
 package com.unimag.ecomerce.services;
 
-import com.unimag.ecomerce.dto.OrderDTO;
-import com.unimag.ecomerce.dto.OrderItemDTO;
-import com.unimag.ecomerce.entities.*;
+import com.unimag.ecomerce.api.dto.OrderDTO;
+import com.unimag.ecomerce.api.dto.OrderItemDTO;
+import com.unimag.ecomerce.domine.entities.*;
 import com.unimag.ecomerce.enums.OrderStatus;
 import com.unimag.ecomerce.exception.NotFoundException;
-import com.unimag.ecomerce.mappers.OrderMapper;
-import com.unimag.ecomerce.repositories.InventoryRepository;
-import com.unimag.ecomerce.repositories.OrderItemRepository;
-import com.unimag.ecomerce.repositories.OrderRepository;
-import com.unimag.ecomerce.repositories.OrderStatusHistoryRepository;
+import com.unimag.ecomerce.services.mappers.OrderMapper;
+import com.unimag.ecomerce.domine.repositories.InventoryRepository;
+import com.unimag.ecomerce.domine.repositories.OrderItemRepository;
+import com.unimag.ecomerce.domine.repositories.OrderRepository;
+import com.unimag.ecomerce.domine.repositories.OrderStatusHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,11 +1,11 @@
 package com.unimag.ecomerce.services;
 
 
-import com.unimag.ecomerce.dto.AddressDTO;
-import com.unimag.ecomerce.entities.Address;
-import com.unimag.ecomerce.mappers.AddressMapper;
+import com.unimag.ecomerce.api.dto.AddressDTO;
+import com.unimag.ecomerce.domine.entities.Address;
+import com.unimag.ecomerce.services.mappers.AddressMapper;
 import com.unimag.ecomerce.exception.NotFoundException;
-import com.unimag.ecomerce.repositories.AddressRepository;
+import com.unimag.ecomerce.domine.repositories.AddressRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

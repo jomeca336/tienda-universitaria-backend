@@ -1,6 +1,6 @@
 package com.unimag.ecomerce.services;
 
-import com.unimag.ecomerce.dto.ReportDTO;
+import com.unimag.ecomerce.api.dto.ReportDTO;
 
 import java.util.List;
 

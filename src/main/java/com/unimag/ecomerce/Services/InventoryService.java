@@ -1,6 +1,6 @@
 package com.unimag.ecomerce.services;
 
-import com.unimag.ecomerce.dto.InventoryDTO;
+import com.unimag.ecomerce.api.dto.InventoryDTO;
 
 public interface InventoryService {
 

@@ -1,7 +1,7 @@
 package com.unimag.ecomerce.services;
 
-import com.unimag.ecomerce.dto.ProductDTO;
-import com.unimag.ecomerce.entities.Product;
+import com.unimag.ecomerce.api.dto.ProductDTO;
+import com.unimag.ecomerce.domine.entities.Product;
 
 import java.util.List;
 

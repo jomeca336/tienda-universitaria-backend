@@ -1,8 +1,8 @@
 package com.unimag.ecomerce.services;
 
-import com.unimag.ecomerce.dto.OrderDTO;
-import com.unimag.ecomerce.dto.OrderItemDTO;
-import com.unimag.ecomerce.entities.Order;
+import com.unimag.ecomerce.api.dto.OrderDTO;
+import com.unimag.ecomerce.api.dto.OrderItemDTO;
+import com.unimag.ecomerce.domine.entities.Order;
 
 import java.util.List;
 

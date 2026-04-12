@@ -1,8 +1,8 @@
 package com.unimag.ecomerce.services.mappers;
 
-import com.unimag.ecomerce.dto.InventoryDTO;
-import com.unimag.ecomerce.entities.Inventory;
-import com.unimag.ecomerce.mappers.InventoryMapper;
+import com.unimag.ecomerce.api.dto.InventoryDTO;
+import com.unimag.ecomerce.domine.entities.Inventory;
+import com.unimag.ecomerce.services.mappers.InventoryMapper;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 

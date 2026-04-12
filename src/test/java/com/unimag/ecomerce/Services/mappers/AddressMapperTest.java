@@ -1,8 +1,8 @@
 package com.unimag.ecomerce.services.mappers;
 
-import com.unimag.ecomerce.dto.AddressDTO;
-import com.unimag.ecomerce.entities.Address;
-import com.unimag.ecomerce.mappers.AddressMapper;
+import com.unimag.ecomerce.api.dto.AddressDTO;
+import com.unimag.ecomerce.domine.entities.Address;
+import com.unimag.ecomerce.services.mappers.AddressMapper;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 

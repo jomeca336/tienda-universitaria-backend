@@ -1,12 +1,12 @@
 package com.unimag.ecomerce.services;
 
-import com.unimag.ecomerce.dto.ReportDTO;
-import com.unimag.ecomerce.entities.Customer;
-import com.unimag.ecomerce.entities.Product;
-import com.unimag.ecomerce.repositories.CustomerRepository;
-import com.unimag.ecomerce.repositories.OrderItemRepository;
-import com.unimag.ecomerce.repositories.OrderRepository;
-import com.unimag.ecomerce.repositories.ProductRepository;
+import com.unimag.ecomerce.api.dto.ReportDTO;
+import com.unimag.ecomerce.domine.entities.Customer;
+import com.unimag.ecomerce.domine.entities.Product;
+import com.unimag.ecomerce.domine.repositories.CustomerRepository;
+import com.unimag.ecomerce.domine.repositories.OrderItemRepository;
+import com.unimag.ecomerce.domine.repositories.OrderRepository;
+import com.unimag.ecomerce.domine.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
