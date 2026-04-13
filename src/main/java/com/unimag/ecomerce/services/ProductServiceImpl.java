@@ -1,5 +1,6 @@
 package com.unimag.ecomerce.services;
 
+import com.unimag.ecomerce.api.dto.InventoryDTO;
 import com.unimag.ecomerce.api.dto.ProductDTO;
 import com.unimag.ecomerce.domine.entities.Inventory;
 import com.unimag.ecomerce.domine.entities.Product;
@@ -70,12 +71,37 @@ public class ProductServiceImpl implements ProductService {
                 .map(mapper::toDTO)
                 .toList();
     }
-
     @Override
+    public ProductDTO.ProductResponse updateInventory(Long id, InventoryDTO.UpdateInventoryRequest request) {
+
+        if (request.stock() == null || request.stock() < 0) {
+            throw new IllegalArgumentException("El stock no puede ser negativo");
+        }
+
+        if (request.minStock() == null || request.minStock() < 0) {
+            throw new IllegalArgumentException("El stock mínimo no puede ser negativo");
+        }
+
+        Product product = getObjectById(id);
+
+        // buscar inventario del producto
+        Inventory inventory = inventoryRepository.findByProductId(id)
+                .orElseThrow(() -> new NotFoundException("Inventory not found for product id: " + id));
+
+        // actualizar valores
+        inventory.setStock(request.stock());
+        inventory.setMinStock(request.minStock());
+
+        inventoryRepository.save(inventory);
+
+        return mapper.toDTO(product);
+    }
     public void delete(Long id) {
         if (!repository.existsById(id)) {
-            throw new NotFoundException("Product not found");
+            throw new NotFoundException("Address not found");
         }
         repository.deleteById(id);
     }
+
+
 }

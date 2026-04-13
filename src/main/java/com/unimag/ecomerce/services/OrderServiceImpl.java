@@ -11,6 +11,8 @@ import com.unimag.ecomerce.domine.repositories.OrderItemRepository;
 import com.unimag.ecomerce.domine.repositories.OrderRepository;
 import com.unimag.ecomerce.domine.repositories.OrderStatusHistoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -96,6 +98,7 @@ public class OrderServiceImpl implements OrderService {
         return mapper.toDTO(repository.save(order));
     }
 
+
     @Override
     public OrderDTO.OrderResponse cancel(Long orderId) {
         Order order = getObjectById(orderId);
@@ -131,10 +134,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<OrderDTO.OrderResponse> list() {
-        return repository.findAll().stream()
-                .map(mapper::toDTO)
-                .toList();
+    public Page<OrderDTO.OrderResponse> list(Pageable pageable) {
+        return repository.findAll(pageable)
+                .map(mapper::toDTO);
     }
 
     private void saveStatusHistory(Order order, OrderStatus previous, OrderStatus next) {
@@ -145,5 +147,11 @@ public class OrderServiceImpl implements OrderService {
                 .changeDate(Instant.now())
                 .build();
         orderStatusHistoryRepository.save(history);
+    }
+    public void delete(Long id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Address not found");
+        }
+        repository.deleteById(id);
     }
 }

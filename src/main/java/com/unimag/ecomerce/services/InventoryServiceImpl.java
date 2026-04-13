@@ -45,4 +45,11 @@ public class InventoryServiceImpl implements InventoryService {
         return repository.findByProductId(productId)
                 .orElseThrow(() -> new NotFoundException("Inventory not found for product id: " + productId));
     }
+
+    public void delete(Long id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Inventory not found");
+        }
+        repository.deleteById(id);
+    }
 }

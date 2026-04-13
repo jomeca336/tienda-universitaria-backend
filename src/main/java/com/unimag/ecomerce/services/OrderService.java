@@ -1,18 +1,24 @@
 package com.unimag.ecomerce.services;
 
-import com.unimag.ecomerce.api.dto.OrderDTO;
+import com.unimag.ecomerce.api.dto.OrderDTO.*;
 import com.unimag.ecomerce.api.dto.OrderItemDTO;
 import com.unimag.ecomerce.domine.entities.Order;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface OrderService {
 
-    OrderDTO.OrderResponse create(OrderDTO.CreateOrderRequest request);
-    OrderDTO.OrderResponse addItem(Long orderId, OrderItemDTO.CreateOrderItemRequest request);
-    OrderDTO.OrderResponse pay(Long orderId);
-    OrderDTO.OrderResponse cancel(Long orderId);
-    OrderDTO.OrderResponse get(Long id);
+    OrderResponse create(CreateOrderRequest request);
+    OrderResponse get(Long id);
+    Page<OrderResponse> list(Pageable pageable);
+
+    OrderResponse addItem(Long orderId, OrderItemDTO.CreateOrderItemRequest request);
+    OrderResponse pay(Long orderId);
+    OrderResponse cancel(Long orderId);
+
+
     Order getObjectById(Long id);
-    List<OrderDTO.OrderResponse> list();
+    void delete(Long id);
+
 }

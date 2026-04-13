@@ -11,5 +11,6 @@ public interface AddressService {
     AddressDTO.AddressResponse get(Long id);
     Address getObjectById(Long id);
     List<AddressDTO.AddressResponse> list();
+
     void delete(Long id);
 }

@@ -51,11 +51,18 @@ public class CustomerServiceImpl implements CustomerService {
 
         return mapper.toDTO(repository.save(customer));
     }
+    @Override
+    @Transactional(readOnly = true)
+    public Customer getObjectById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Customer not found with id: " + id));
+    }
 
-
-
-
-
-
+    public void delete(Long id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Customer not found");
+        }
+        repository.deleteById(id);
+    }
 
 }
