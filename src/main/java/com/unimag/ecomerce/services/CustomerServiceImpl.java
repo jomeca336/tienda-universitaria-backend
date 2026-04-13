@@ -26,26 +26,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO.CustomerResponse update(Long id, CustomerDTO.UpdateCustomerRequest request) {
-
-        Customer customer = getObjectById(id);
-
-        mapper.updateEntity(request, customer);
-
-        return mapper.toDTO(repository.save(customer));
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public CustomerDTO.CustomerResponse get(Long id) {
-        return mapper.toDTO(getObjectById(id));
-    }
+        Customer customer = repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Customer %d not found".formatted(id)));
 
-    @Override
-    @Transactional(readOnly = true)
-    public Customer getObjectById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Customer not found with id: " + id));
+        return mapper.toDTO(customer);
     }
 
     @Override
@@ -57,10 +43,19 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void delete(Long id) {
-        if (!repository.existsById(id)) {
-            throw new NotFoundException("Customer not found");
-        }
-        repository.deleteById(id);
+    public CustomerDTO.CustomerResponse update(Long id, CustomerDTO.UpdateCustomerRequest request) {
+        Customer customer = repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Customer %d not found".formatted(id)));
+
+        mapper.updateEntity(request, customer);
+
+        return mapper.toDTO(repository.save(customer));
     }
+
+
+
+
+
+
+
 }

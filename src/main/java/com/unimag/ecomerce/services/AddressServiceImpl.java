@@ -1,7 +1,7 @@
 package com.unimag.ecomerce.services;
 
 
-import com.unimag.ecomerce.api.dto.AddressDTO;
+import com.unimag.ecomerce.api.dto.AddressDTO.*;
 import com.unimag.ecomerce.domine.entities.Address;
 import com.unimag.ecomerce.services.mappers.AddressMapper;
 import com.unimag.ecomerce.exception.NotFoundException;
@@ -22,14 +22,14 @@ public class AddressServiceImpl implements AddressService {
     private final AddressMapper mapper;
 
     @Override
-    public AddressDTO.AddressResponse create(AddressDTO.CreateAddressRequest request) {
+    public AddressResponse create(CreateAddressRequest request) {
         Address entity = mapper.toEntity(request);
         return mapper.toDTO(repository.save(entity));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public AddressDTO.AddressResponse get(Long id) {
+    public AddressResponse get(Long id) {
         return mapper.toDTO(getObjectById(id));
     }
 
@@ -42,7 +42,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<AddressDTO.AddressResponse> list() {
+    public List<AddressResponse> list() {
         return repository.findAll().stream()
                 .map(mapper::toDTO)
                 .toList();
