@@ -6,5 +6,5 @@ public interface InventoryService {
 
     InventoryResponse update(Long productId, UpdateInventoryRequest request);
     InventoryResponse getByProductId(Long productId);
-    void delet(Long id);
+    void delete(Long id);
 }

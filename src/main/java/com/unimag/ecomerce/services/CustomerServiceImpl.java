@@ -2,9 +2,9 @@ package com.unimag.ecomerce.services;
 
 import com.unimag.ecomerce.api.dto.CustomerDTO;
 import com.unimag.ecomerce.domine.entities.Customer;
-import com.unimag.ecomerce.services.mappers.CustomerMapper;
-import com.unimag.ecomerce.exception.NotFoundException;
 import com.unimag.ecomerce.domine.repositories.CustomerRepository;
+import com.unimag.ecomerce.exception.ResourceNotFoundException;
+import com.unimag.ecomerce.services.mappers.CustomerMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,10 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional(readOnly = true)
     public CustomerDTO.CustomerResponse get(Long id) {
-        Customer customer = repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Customer %d not found".formatted(id)));
-
-        return mapper.toDTO(customer);
+        return mapper.toDTO(getCustomerById(id));
     }
 
     @Override
@@ -44,25 +41,21 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO.CustomerResponse update(Long id, CustomerDTO.UpdateCustomerRequest request) {
-        Customer customer = repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Customer %d not found".formatted(id)));
-
+        Customer customer = getCustomerById(id);
         mapper.updateEntity(request, customer);
-
         return mapper.toDTO(repository.save(customer));
     }
-    @Override
-    @Transactional(readOnly = true)
-    public Customer getObjectById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Customer not found with id: " + id));
-    }
 
+    @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
-            throw new NotFoundException("Customer not found");
+            throw new ResourceNotFoundException("Customer not found with id: " + id);
         }
         repository.deleteById(id);
     }
 
+    Customer getCustomerById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found with id: " + id));
+    }
 }

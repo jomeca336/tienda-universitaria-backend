@@ -2,9 +2,9 @@ package com.unimag.ecomerce.services;
 
 import com.unimag.ecomerce.api.dto.CategoryDTO;
 import com.unimag.ecomerce.domine.entities.Category;
-import com.unimag.ecomerce.services.mappers.CategoryMapper;
-import com.unimag.ecomerce.exception.NotFoundException;
 import com.unimag.ecomerce.domine.repositories.CategoryRepository;
+import com.unimag.ecomerce.exception.ResourceNotFoundException;
+import com.unimag.ecomerce.services.mappers.CategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,14 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional(readOnly = true)
     public CategoryDTO.CategoryResponse get(Long id) {
-        return mapper.toDTO(getObjectById(id));
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Category getObjectById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Category not found with id: " + id));
+        return mapper.toDTO(getCategoryById(id));
     }
 
     @Override
@@ -49,8 +42,13 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
-            throw new NotFoundException("Category not found");
+            throw new ResourceNotFoundException("Category not found with id: " + id);
         }
         repository.deleteById(id);
+    }
+
+    Category getCategoryById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
     }
 }
