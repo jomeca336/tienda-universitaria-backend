@@ -2,6 +2,7 @@ package com.unimag.ecomerce.api.controllers;
 
 
 import com.unimag.ecomerce.api.dto.OrderDTO.*;
+import com.unimag.ecomerce.api.dto.OrderItemDTO;
 import com.unimag.ecomerce.services.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -61,4 +62,9 @@ public class OrderController {
         return ResponseEntity.ok(service.cancel(id));
     }
 
+    @PostMapping("/{id}/items")
+    public ResponseEntity<OrderResponse> addItem(@PathVariable Long id,
+                                                  @Valid @RequestBody OrderItemDTO.CreateOrderItemRequest req) {
+        return ResponseEntity.ok(service.addItem(id, req));
+    }
 }
