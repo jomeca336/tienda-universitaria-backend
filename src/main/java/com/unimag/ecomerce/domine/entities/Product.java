@@ -28,6 +28,10 @@ public class Product {
 
     private Boolean active;
 
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean deleted = false;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

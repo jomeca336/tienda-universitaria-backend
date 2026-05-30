@@ -49,4 +49,10 @@ public class ProductController {
                                                            @Valid @RequestBody UpdateInventoryRequest req) {
         return ResponseEntity.ok(service.updateInventory(id, req));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

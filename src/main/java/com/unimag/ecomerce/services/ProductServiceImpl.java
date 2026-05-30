@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(readOnly = true)
     public List<ProductDTO.ProductResponse> list() {
-        return repository.findAll().stream()
+        return repository.findByDeletedFalse().stream()
                 .map(mapper::toDTO)
                 .toList();
     }
@@ -90,10 +90,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void delete(Long id) {
-        if (!repository.existsById(id)) {
-            throw new ResourceNotFoundException("Product not found with id: " + id);
-        }
-        repository.deleteById(id);
+        Product product = getProductById(id);
+        product.setDeleted(true);
+        repository.save(product);
     }
 
     Product getProductById(Long id) {
