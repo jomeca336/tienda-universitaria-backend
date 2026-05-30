@@ -31,7 +31,9 @@ public class ProductDTO {
             String name,
             String description,
             Double price,
-            Boolean active
+            Boolean active,
+            Integer stock,
+            Integer minStock
 
     ) implements Serializable {}
 }

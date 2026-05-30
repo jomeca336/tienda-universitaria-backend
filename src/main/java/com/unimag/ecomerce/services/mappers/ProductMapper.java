@@ -10,6 +10,8 @@ import org.mapstruct.MappingTarget;
 public interface ProductMapper {
 
     @Mapping(target = "categoryId", source = "category.id")
+    @Mapping(target = "stock",    source = "inventory.stock")
+    @Mapping(target = "minStock", source = "inventory.minStock")
     ProductDTO.ProductResponse toDTO(Product product);
 
     @Mapping(target = "id", ignore = true)
