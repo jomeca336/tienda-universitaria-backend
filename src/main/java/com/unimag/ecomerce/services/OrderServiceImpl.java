@@ -78,10 +78,19 @@ public class OrderServiceImpl implements OrderService {
         Product product = productRepository.findById(request.productId())
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + request.productId()));
 
-        // Regla 6.2: el producto debe estar activo
+        // el producto debe estar activo
         if (product.getActive() == null || !product.getActive()) {
             throw new BusinessException("El producto con id " + request.productId() + " no está activo");
         }
+
+        // reservar stock inmediatamente al agregar el ítem
+        Inventory inventory = inventoryRepository.findByProductId(product.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Inventory not found for product: " + product.getId()));
+        if (inventory.getStock() < request.quantity()) {
+            throw new BusinessException("Stock insuficiente para \"" + product.getName() + "\". Disponible: " + inventory.getStock());
+        }
+        inventory.setStock(inventory.getStock() - request.quantity());
+        inventoryRepository.save(inventory);
 
         double unitPrice = product.getPrice();
         double subtotal = unitPrice * request.quantity();
@@ -110,21 +119,7 @@ public class OrderServiceImpl implements OrderService {
             throw new BusinessException("No se puede pagar un pedido sin ítems");
         }
 
-        // Regla 6.3: validar stock suficiente para todos los ítems antes de descontar
-        for (OrderItem item : order.getItems()) {
-            Inventory inventory = item.getProduct().getInventory();
-            if (inventory == null || inventory.getStock() < item.getQuantity()) {
-                throw new BusinessException("Stock insuficiente para el producto: " + item.getProduct().getName());
-            }
-        }
-
-        // Regla 6.3: descontar inventario
-        for (OrderItem item : order.getItems()) {
-            Inventory inventory = item.getProduct().getInventory();
-            inventory.setStock(inventory.getStock() - item.getQuantity());
-            inventoryRepository.save(inventory);
-        }
-
+        // stock ya fue descontado al agregar los ítems
         saveStatusHistory(order, order.getStatus(), OrderStatus.PAID);
         order.setStatus(OrderStatus.PAID);
         return mapper.toDTO(repository.save(order));
@@ -169,8 +164,8 @@ public class OrderServiceImpl implements OrderService {
             throw new BusinessException("El pedido no puede cancelarse en estado: " + order.getStatus());
         }
 
-        // Regla 6.5: si estaba PAID, revertir stock
-        if (order.getStatus() == OrderStatus.PAID && order.getItems() != null) {
+        // devolver stock al cancelar (fue reservado al agregar ítems)
+        if (order.getItems() != null) {
             for (OrderItem item : order.getItems()) {
                 Inventory inventory = item.getProduct().getInventory();
                 if (inventory != null) {
