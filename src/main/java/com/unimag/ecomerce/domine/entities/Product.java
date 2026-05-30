@@ -29,7 +29,7 @@ public class Product {
     private Boolean active;
 
     @Builder.Default
-    @Column(nullable = false)
+    @Column(columnDefinition = "boolean not null default false")
     private Boolean deleted = false;
 
     @ManyToOne

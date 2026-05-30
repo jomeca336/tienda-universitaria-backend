@@ -11,7 +11,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findBySku(String sku);
 
-    List<Product> findByDeletedFalse();
+    List<Product> findByDeletedFalseOrderByIdAsc();
 
     List<Product> findByActiveTrueAndCategoryId(Long categoryId);
 

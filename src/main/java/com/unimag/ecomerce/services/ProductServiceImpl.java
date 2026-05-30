@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(readOnly = true)
     public List<ProductDTO.ProductResponse> list() {
-        return repository.findByDeletedFalse().stream()
+        return repository.findByDeletedFalseOrderByIdAsc().stream()
                 .map(mapper::toDTO)
                 .toList();
     }
