@@ -11,8 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -39,7 +40,8 @@ public class ReportServiceImpl implements ReportService {
     public List<ReportDTO.MonthlyIncomeResponse> getMonthlyIncome() {
         return orderRepository.getMonthlyIncome().stream()
                 .map(row -> {
-                    LocalDateTime date = ((Timestamp) row[0]).toLocalDateTime();
+                    Instant instant = (Instant) row[0];
+                    LocalDateTime date = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
                     return new ReportDTO.MonthlyIncomeResponse(
                             date.getYear(),
                             date.getMonthValue(),
