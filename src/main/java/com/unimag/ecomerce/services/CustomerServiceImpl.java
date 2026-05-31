@@ -34,7 +34,15 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional(readOnly = true)
     public List<CustomerDTO.CustomerResponse> list() {
-        return repository.findAll().stream()
+        return repository.findByDeletedFalseOrderByIdAsc().stream()
+                .map(mapper::toDTO)
+                .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerDTO.CustomerResponse> listDeleted() {
+        return repository.findByDeletedTrueOrderByIdAsc().stream()
                 .map(mapper::toDTO)
                 .toList();
     }
@@ -48,10 +56,17 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void delete(Long id) {
-        if (!repository.existsById(id)) {
-            throw new ResourceNotFoundException("Customer not found with id: " + id);
-        }
-        repository.deleteById(id);
+        Customer customer = getCustomerById(id);
+        customer.setDeleted(true);
+        repository.save(customer);
+    }
+
+    @Override
+    public CustomerDTO.CustomerResponse restore(Long id) {
+        Customer customer = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found with id: " + id));
+        customer.setDeleted(false);
+        return mapper.toDTO(repository.save(customer));
     }
 
     Customer getCustomerById(Long id) {

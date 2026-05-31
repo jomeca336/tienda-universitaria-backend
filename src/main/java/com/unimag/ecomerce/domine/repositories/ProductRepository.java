@@ -13,6 +13,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByDeletedFalseOrderByIdAsc();
 
+    List<Product> findByDeletedTrueOrderByIdAsc();
+
     List<Product> findByActiveTrueAndCategoryId(Long categoryId);
 
     @Query("SELECT p FROM Product p WHERE p.deleted = false AND p.inventory.stock <= p.inventory.minStock")

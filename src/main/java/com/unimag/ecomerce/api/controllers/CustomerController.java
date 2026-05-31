@@ -37,6 +37,16 @@ public class CustomerController {
         return ResponseEntity.ok(service.list());
     }
 
+    @GetMapping("/deleted")
+    public ResponseEntity<List<CustomerResponse>> listDeleted() {
+        return ResponseEntity.ok(service.listDeleted());
+    }
+
+    @PutMapping("/{id}/restore")
+    public ResponseEntity<CustomerResponse> restore(@PathVariable Long id) {
+        return ResponseEntity.ok(service.restore(id));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<CustomerResponse> update(@PathVariable Long id,
                                                    @Valid @RequestBody UpdateCustomerRequest req) {

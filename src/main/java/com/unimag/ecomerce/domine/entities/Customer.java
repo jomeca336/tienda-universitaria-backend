@@ -24,6 +24,10 @@ public class Customer {
     String email;
     CustomerStatus status;
 
+    @Builder.Default
+    @Column(columnDefinition = "boolean not null default false")
+    private Boolean deleted = false;
+
     @OneToMany
     List <Address> addresses;
 

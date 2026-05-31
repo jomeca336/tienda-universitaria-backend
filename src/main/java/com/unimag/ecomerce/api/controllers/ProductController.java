@@ -55,4 +55,14 @@ public class ProductController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/deleted")
+    public ResponseEntity<List<ProductResponse>> listDeleted() {
+        return ResponseEntity.ok(service.listDeleted());
+    }
+
+    @PutMapping("/{id}/restore")
+    public ResponseEntity<ProductResponse> restore(@PathVariable Long id) {
+        return ResponseEntity.ok(service.restore(id));
+    }
 }

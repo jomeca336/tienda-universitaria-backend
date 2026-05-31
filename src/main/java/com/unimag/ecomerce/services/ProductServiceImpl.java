@@ -95,6 +95,22 @@ public class ProductServiceImpl implements ProductService {
         repository.save(product);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<ProductDTO.ProductResponse> listDeleted() {
+        return repository.findByDeletedTrueOrderByIdAsc().stream()
+                .map(mapper::toDTO)
+                .toList();
+    }
+
+    @Override
+    public ProductDTO.ProductResponse restore(Long id) {
+        Product product = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+        product.setDeleted(false);
+        return mapper.toDTO(repository.save(product));
+    }
+
     Product getProductById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));

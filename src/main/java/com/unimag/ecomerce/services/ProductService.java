@@ -13,4 +13,6 @@ public interface ProductService {
     ProductDTO.ProductResponse update(Long id, ProductDTO.UpdateProductRequest request);
     ProductDTO.ProductResponse updateInventory(Long id, InventoryDTO.UpdateInventoryRequest request);
     void delete(Long id);
+    List<ProductDTO.ProductResponse> listDeleted();
+    ProductDTO.ProductResponse restore(Long id);
 }
