@@ -21,6 +21,8 @@ public class OrderDTO {
             Long customerId,
             String customerName,
             Long shippingAddressId,
+            String shippingAddressLine,
+            String shippingCity,
             Instant orderDate,
             Double total,
             OrderStatus status,
