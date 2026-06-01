@@ -1,7 +1,9 @@
 package com.unimag.ecomerce.api.controllers;
 
 import com.unimag.ecomerce.api.dto.CustomerDTO.*;
+import com.unimag.ecomerce.api.dto.OrderDTO;
 import com.unimag.ecomerce.services.CustomerService;
+import com.unimag.ecomerce.services.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
 public class CustomerController {
 
     private final CustomerService service;
+    private final OrderService orderService;
 
     @PostMapping
     public ResponseEntity<CustomerResponse> create(@Valid @RequestBody CreateCustomerRequest req,
@@ -51,6 +54,11 @@ public class CustomerController {
     public ResponseEntity<CustomerResponse> update(@PathVariable Long id,
                                                    @Valid @RequestBody UpdateCustomerRequest req) {
         return ResponseEntity.ok(service.update(id, req));
+    }
+
+    @GetMapping("/{id}/orders")
+    public ResponseEntity<List<OrderDTO.OrderResponse>> getOrders(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.getByCustomer(id));
     }
 
     @DeleteMapping("/{id}")

@@ -198,6 +198,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public java.util.List<OrderDTO.OrderResponse> getByCustomer(Long customerId) {
+        return repository.findByCustomerIdOrderByOrderDateDesc(customerId).stream()
+                .map(mapper::toDTO)
+                .toList();
+    }
+
+    @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Order not found with id: " + id);

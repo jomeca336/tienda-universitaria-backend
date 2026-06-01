@@ -18,4 +18,5 @@ public interface OrderService {
     OrderResponse cancel(Long orderId);
 
     void delete(Long id);
+    java.util.List<OrderResponse> getByCustomer(Long customerId);
 }
