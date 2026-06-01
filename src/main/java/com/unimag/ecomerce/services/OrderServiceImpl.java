@@ -37,6 +37,7 @@ public class OrderServiceImpl implements OrderService {
     private final AddressRepository addressRepository;
     private final ProductRepository productRepository;
     private final OrderMapper mapper;
+    private final StockMovementService stockMovementService;
 
     @Override
     public OrderDTO.OrderResponse create(OrderDTO.CreateOrderRequest request) {
@@ -89,8 +90,10 @@ public class OrderServiceImpl implements OrderService {
         if (inventory.getStock() < request.quantity()) {
             throw new BusinessException("Stock insuficiente para \"" + product.getName() + "\". Disponible: " + inventory.getStock());
         }
-        inventory.setStock(inventory.getStock() - request.quantity());
+        int newStock = inventory.getStock() - request.quantity();
+        inventory.setStock(newStock);
         inventoryRepository.save(inventory);
+        stockMovementService.record(product, -request.quantity(), "VENTA", newStock);
 
         double unitPrice = product.getPrice();
         double subtotal = unitPrice * request.quantity();
@@ -169,8 +172,10 @@ public class OrderServiceImpl implements OrderService {
             for (OrderItem item : order.getItems()) {
                 Inventory inventory = item.getProduct().getInventory();
                 if (inventory != null) {
-                    inventory.setStock(inventory.getStock() + item.getQuantity());
+                    int newStock = inventory.getStock() + item.getQuantity();
+                    inventory.setStock(newStock);
                     inventoryRepository.save(inventory);
+                    stockMovementService.record(item.getProduct(), item.getQuantity(), "CANCELACION", newStock);
                 }
             }
         }
