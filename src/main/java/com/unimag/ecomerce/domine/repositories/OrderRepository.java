@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    List<Order> findByCustomerId(Long customerId);
+    List<Order> findByCustomerIdOrderByOrderDateDesc(Long customerId);
 
 
     @Query("SELECT o FROM Order o WHERE o.customer.id = :customerId " +

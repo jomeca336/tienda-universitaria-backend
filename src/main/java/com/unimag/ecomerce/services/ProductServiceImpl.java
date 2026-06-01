@@ -25,6 +25,7 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryServiceImpl categoryService;
     private final InventoryRepository inventoryRepository;
     private final ProductMapper mapper;
+    private final StockMovementService stockMovementService;
 
     @Override
     public ProductDTO.ProductResponse create(ProductDTO.CreateProductRequest request) {
@@ -82,9 +83,13 @@ public class ProductServiceImpl implements ProductService {
         Product product = getProductById(id);
         Inventory inventory = inventoryRepository.findByProductId(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Inventory not found for product id: " + id));
+        int added = request.stock() - inventory.getStock();
         inventory.setStock(request.stock());
         inventory.setMinStock(request.minStock());
         inventoryRepository.save(inventory);
+        if (added != 0) {
+            stockMovementService.record(product, added, "ENTRADA", request.stock());
+        }
         return mapper.toDTO(product);
     }
 
